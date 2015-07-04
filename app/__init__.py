@@ -13,6 +13,7 @@ api = Api(app)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
-from resources import ItemResource
+from resources import ItemResource, UserResource
 
-api.add_resource(ItemResource, '/api/items', '/api/items/<int:id>')
+api.add_resource(ItemResource, '/api/items', '/api/user/items/<int:id>', '/api/items/<int:id>')
+api.add_resource(UserResource, '/api/user/register')

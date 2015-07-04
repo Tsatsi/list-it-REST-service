@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from models import Item
 import factory
 
@@ -8,9 +6,9 @@ class ItemFactory(factory.Factory):
     class Meta:
         model = Item
 
-    name = factory.Sequence(lambda n: 'my list item %s' % n)
-    description = factory.Sequence(lambda n: 'this is a description of my list item %s' % n)
-    due_date = datetime.strptime("2015-08-04", "%Y-%m-%d")
+    name = 'my list item'
+    description = 'this is a description of my list item'
+    priority = 'High'
 
 
 class ItemFactoryTwo(factory.Factory):
@@ -19,7 +17,7 @@ class ItemFactoryTwo(factory.Factory):
 
     name = 'my list item 2'
     description = 'this is a description of my list item 2'
-    due_date = datetime.strptime("2015-08-04", "%Y-%m-%d")
+    priority = 'High'
 
 
 class ItemFactoryThree(factory.Factory):
@@ -28,7 +26,7 @@ class ItemFactoryThree(factory.Factory):
 
     name = 'my list item 3'
     description = 'this is a description of my list item 3'
-    due_date = datetime.strptime("2015-08-04", "%Y-%m-%d")
+    priority = 'High'
 
 
 class ItemFactoryFour(factory.Factory):
@@ -37,7 +35,7 @@ class ItemFactoryFour(factory.Factory):
 
     name = 'my list item 4'
     description = 'this is a description of my list item 4'
-    due_date = datetime.strptime("2015-08-04", "%Y-%m-%d")
+    priority = 'High'
 
 
 class ItemFactoryFive(factory.Factory):
@@ -46,4 +44,4 @@ class ItemFactoryFive(factory.Factory):
 
     name = 'my list item 5'
     description = 'this is a description of my list item 5'
-    due_date = datetime.strptime("2015-08-04", "%Y-%m-%d")
+    priority = 'High'

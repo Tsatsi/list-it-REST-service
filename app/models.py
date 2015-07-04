@@ -10,7 +10,7 @@ class ListItModel(db.Model):
 
 
 class Item(ListItModel):
-    def __init__(self, user_id, name, priority=None, description=None, ):
+    def __init__(self, user_id, name, priority=None, description=None):
         self.name = name
         self.priority = priority
         self.description = description
@@ -18,10 +18,11 @@ class Item(ListItModel):
 
     def to_json(self):
         return dict(id=self.id,
-                    user_id=self.user.id,
+                    user_id=self.user_id,
                     name=self.name,
-                    description=self.description,
-                    priority=self.priority())
+                    priority=self.priority,
+                    description=self.description
+                    )
 
     def formatted_date(self):
         formatted_date = None
@@ -35,8 +36,8 @@ class Item(ListItModel):
     description = db.Column(db.String(100))
     priority = db.Column(db.String(128))
     creation_date = db.Column(db.DateTime, default=db.func.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('user')
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship('User')
 
 
 class User(ListItModel):
@@ -49,7 +50,8 @@ class User(ListItModel):
                     username=self.username,
                     email=self.email)
 
-    __tablename__ = "user"
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50))
     email = db.Column(db.String(150))
+    items = db.relationship('Item', cascade="all, delete-orphan", lazy="dynamic")
